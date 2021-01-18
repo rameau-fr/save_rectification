@@ -1,0 +1,6 @@
+Header header
+string car_id
+int64 KF_ind
+uint32[] BowVector
+float32[] BowScore
+uint32 Cov_update

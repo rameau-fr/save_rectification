@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+      <!-- Params -->
+	<!--arg name="Calib_file" default="/home/francois/Documents/Calib/SLAMParams.yml" /-->
+	<arg name="Calib_file" default="/home/francois/Documents/Calib/SLAMParams_150419.yml" />
+	<arg name="CarNb" default="4"/>
+
+      <!-- Stereo Visual Odometry -->
+ <node pkg="sslam" type="sslam_node" name="sslam$(arg CarNb)" respawn="true"  args="_approximate_sync:=true">
+	 <param name="Path_calib" value="$(arg Calib_file)" />
+ </node>
+ 
+ <!-- Extract Data -->
+  <node pkg="rectif_save" type="rectif_save_CCTV_CAR_Pose" name="ExtractData" respawn="false" output="screen">
+ </node>
+ 
+   <!-- Display Tracks -->
+ <node pkg="image_view" type="image_view" name="SeeTracks$(arg CarNb)" respawn="false" args="image:=/NHSlamCar$(arg CarNb)/TracksCar$(arg CarNb)">
+ </node>
+ 
+
+ 
+</launch>
+
